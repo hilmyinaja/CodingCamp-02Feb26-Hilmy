@@ -8,17 +8,38 @@
     
     <!-- CSS External -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind CSS CDN -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
     <!-- Header Content -->
-    <header> </header>
+    <header>
+        <h1 class="text-2xl font-bold pb-8">Todo List - Hilmy</h1>
+    </header>
 
     <!-- Main Content -->
-    <main> </main>
+    <main>
+        <section>
+            <!-- Form Section -->
+            <form>
+                <!-- Todo Input -->
+                <input class="border p-2 rounded" type="text" id="todo-input" placeholder="Enter a new todo item" required>
+
+                <!-- Date Input -->
+                <input class="border p-2 rounded" type="date" id="todo-date" placeholder="Enter due date" required>
+            </form>
+
+            <!-- Add button -->
+            <button class="bg-blue-500 text-white "id="button"  onclick="addTodo()">Add Todo</button>
+        </section>
+    </main>
 
     <!-- Footer Content -->
-    <footer> </footer>
+    <footer class="pb-8">
+        <p class="text-center text-gray-600">© 2026 Hilmy's Todo List App</p>
+    </footer>
 
     <!-- Javascript External -->
     <script src="js/script.js"></script>
