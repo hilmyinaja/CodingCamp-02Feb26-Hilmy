@@ -1,5 +1,17 @@
+main {
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #3BC1A8;
+}
+
 body {
+    font-family: 'Poppins', sans-serif;
     justify-items: center;
     height: 100vh;
     align-content: center;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 10px;
 }
