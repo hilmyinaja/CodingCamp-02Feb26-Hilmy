@@ -12,7 +12,8 @@ function addTodo() {
         // Create a new todo object
         const newTodo = {
             todo: todoInput.value.trim(),
-            date: todoDate.value
+            date: todoDate.value,
+            status: 'Pending'
         };
         todos.push(newTodo);
 
@@ -26,16 +27,13 @@ function addTodo() {
 
 // Function to toggle the status of a specific todo item 
 function toggleStatus(index) {
-    const statusBtn = document.getElementById(`status-btn-${index}`);
-    if (statusBtn.innerText === 'Pending') {
-        statusBtn.innerText = 'Completed';
-        statusBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
-        statusBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+    // Toggle the status in the todo object
+    if (todos[index].status === 'Pending') {
+        todos[index].status = 'Completed';
     } else {
-        statusBtn.innerText = 'Pending';
-        statusBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
-        statusBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+        todos[index].status = 'Pending';
     }
+    renderTodos();
 }
 
 // Function to delete a specific todo item
@@ -64,12 +62,13 @@ function renderTodos() {
 
     // Render each todo item on table row and table data
     todos.forEach((item, index) => {
+        const statusClass = item.status === 'Completed' ? 'bg-green-500 hover:bg-green-600' : 'bg-yellow-500 hover:bg-yellow-600';
         todoList.innerHTML += `
             <tr class="border-b">
                 <td class="p-2 break-words max-w-[140px]">${item.todo}</td>
                 <td class="p-2">${item.date}</td>
                 <td class="p-2">
-                    <button id="status-btn-${index}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded" onclick="toggleStatus(${index})">Pending</button>
+                    <button id="status-btn-${index}" class="${statusClass} text-white font-bold py-1 px-2 rounded" onclick="toggleStatus(${index})">${item.status}</button>
                 </td>
                 <td class="p-2">
                     <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-center" onclick="deleteTodo(${index})">Delete</button>
@@ -81,8 +80,14 @@ function renderTodos() {
 
 // Function to delete all todo items
 function deleteAllTodos() {
-    todos = [];
-    renderTodos();
+    if (todos.length === 0) {
+        alert('No todos to delete.');
+        return;
+    }
+    if (confirm('Are you sure you want to delete all todos?')) {
+        todos = [];
+        renderTodos();
+    }
 }
 
 // Function to filter todo items by due date ascending
